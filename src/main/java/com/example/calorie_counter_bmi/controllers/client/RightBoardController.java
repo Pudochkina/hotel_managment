@@ -405,7 +405,7 @@ public class RightBoardController implements Initializable {
 
     }
     /**
-     * метод который вызывается в классе DBUtils в методе changeSceneFromLogInToCenterBoard
+     * метод который вызывается в классе ViewFactory в методе changeSceneFromLogInToCenterBoard
      * используется для того, чтобы при входе в аккаунт
      * данные пользователя отобразились на странице
      */
