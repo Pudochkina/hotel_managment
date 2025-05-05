@@ -1,0 +1,55 @@
+.root {
+    -fx-background-color: white; /* Цвет фона */
+    -fx-font-family: Montserrat;
+}
+
+.input_field {
+    -fx-background-color: white;
+    -fx-pref-height: 35;
+    -fx-pref-width: 231;
+    -fx-font-size: 1em;
+    -fx-font-family: Montserrat;
+}
+
+Button {
+    -fx-background-color: #97DEC9; /* Цвет фона кнопки */
+    -fx-text-fill: black; /* Цвет текста на кнопке */
+}
+
+Button:hover {
+    -fx-background-color: #CCCCFF; /* Цвет фона кнопки при наведении */
+    -fx-cursor: hand;
+}
+
+#users_daily_proteins_label, #users_daily_total_label, #users_current_fiber_number_label, #users_current_fat_number_label, #users_current_carbohydrates_number_label, #users_current_proteins_number_label, #users_current_total_number_label, #users_daily_fat_label, #users_daily_fiber_label, #users_daily_carbohydrates_label {
+    -fx-font-size: 12px; /* Размер шрифта */
+    -fx-text-fill: black; /* Цвет текста */
+    -fx-font-weight: bold;
+}
+
+#total_bold_size, #proteins_bold_size, #fat_bold_size, #carbo_bold_size, #fiber_bold_size, #what_ate_today, #add_new_dish {
+     -fx-font-size: 14px; /* Размер шрифта */
+     -fx-text-fill: black; /* Цвет текста */
+}
+
+#not_bold_out_of_proteins, #not_bold_out_of_fat, #not_bold_out_of_carbo, #not_bold_out_of_fiber, #not_bold_out_of_total {
+     -fx-font-size: 12px; /* Размер шрифта */
+     -fx-text-fill: black; /* Цвет текста */
+}
+
+#name_ate_product_table_column, #amount_ate_product_table_column, #calories_ate_product_table_column {
+    -fx-font-size: 12px;
+    -fx-text-fill: #333333;
+    -fx-font-family: Montserrat;
+    -fx-background-color: #CCCCFF;
+}
+
+
+
+#name_ate_product_table_column {
+    -fx-pref-width: 150;
+}
+
+#amount_ate_product_table_column, #calories_ate_product_table_column {
+    -fx-alignment: CENTER;
+}

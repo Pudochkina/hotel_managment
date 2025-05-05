@@ -1,0 +1,40 @@
+.root {
+    -fx-background-color: #CCCCFF; /* Цвет фона */
+    -fx-font-family: Montserrat;
+}
+
+VBox {
+    -fx-padding: 5; /* Отступы вокруг элементов */
+    -fx-spacing: 5; /* Расстояние между элементами */
+    -fx-background-color: #CCCCFF;
+}
+
+Text {
+    -fx-font-size: 22px; /* Размер шрифта */
+    -fx-fill: black; /* Цвет текста */
+    -fx-font-family: Montserrat;
+}
+
+Label {
+    -fx-font-size: 14px; /* Размер шрифта */
+    -fx-text-fill: black; /* Цвет текста */
+}
+
+.textField {
+    -fx-pref-width: 80;
+    -fx-background-color: #CCCCFF;
+        -fx-font-size: 1.2em;
+        -fx-font-family: Montserrat;
+    ; /* Ширина текстового поля */
+}
+
+Button {
+    -fx-background-color: #97DEC9; /* Цвет фона кнопки */
+    -fx-text-fill: black; /* Цвет текста на кнопке */
+}
+
+Button:hover {
+    -fx-background-color: #CCCCFF; /* Цвет фона кнопки при наведении */
+    -fx-cursor: hand;
+}
+
