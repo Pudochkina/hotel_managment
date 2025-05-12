@@ -14,64 +14,77 @@
 .input_field_add_product {
     -fx-background-color: white;
     -fx-pref-height: 25;
-    -fx-pref-width: 86;
+    -fx-pref-width: 150;
     -fx-font-size: 1em;
     -fx-font-family: Montserrat;
 }
 
 Button {
-    -fx-background-color: #97DEC9; /* Цвет фона кнопки */
+    -fx-background-color: #ef7b45ff; /* Цвет фона кнопки */
     -fx-text-fill: black; /* Цвет текста на кнопке */
 }
 
 Button:hover {
-    -fx-background-color: #CCCCFF; /* Цвет фона кнопки при наведении */
+    -fx-background-color: #d84727ff; /* Цвет фона кнопки при наведении */
     -fx-cursor: hand;
 }
 
 Label {
-    -fx-font-size: 12px; /* Размер шрифта */
+    -fx-font-size: 16px; /* Размер шрифта */
     -fx-text-fill: black; /* Цвет текста */
+    -fx-font-family: Consolas;
     -fx-font-weight: bold;
 }
 
-#add_product_size_bold, #what_can_eat_size_bold {
-    -fx-font-size: 14px; /* Размер шрифта */
-    -fx-text-fill: black; /* Цвет текста */
-    -fx-font-weight: bold;
-}
-
-#name_can_eat_product_table_column, #calorie_dose_can_eat_product_table_column, #proteins_dose_can_eat_product_table_column, #fat_dose_can_eat_product_table_column, #carbohydrates_dose_can_eat_product_table_column, #fiber_dose_can_eat_product_table_column {
+#guest_fio_column, #guest_phone_column, #guest_email_column, #guest_date_birth_column, #guest_passport_column {
     -fx-font-size: 12px;
     -fx-text-fill: #333333;
     -fx-font-family: Montserrat;
-    -fx-background-color: #CCCCFF;
+    -fx-background-color: #cdedf6ff;
     -fx-alignment: CENTER;
 }
 
-#name_can_eat_product_table_column {
-    -fx-pref-width: 236;
+#guest_fio_column {
+    -fx-pref-width: 205;
 }
 
-#name_can_eat_product_table_column:hover {
-    -fx-pref-width: 236;
+#guest_fio_column:hover {
+    -fx-pref-width: 205;
     -fx-background-color: white;
 }
 
-#calorie_dose_can_eat_product_table_column, #proteins_dose_can_eat_product_table_column, #fat_dose_can_eat_product_table_column, #fiber_dose_can_eat_product_table_column {
-    -fx-pref-width: 90;
+#guest_phone_column {
+    -fx-pref-width: 120;
 }
 
-#calorie_dose_can_eat_product_table_column:hover, #proteins_dose_can_eat_product_table_column:hover, #fat_dose_can_eat_product_table_column:hover, #fiber_dose_can_eat_product_table_column:hover {
-    -fx-pref-width: 90;
+#guest_phone_column:hover {
+    -fx-pref-width: 120;
     -fx-background-color: white;
 }
 
-#carbohydrates_dose_can_eat_product_table_column {
-    -fx-pref-width: 110;
+#guest_email_column: {
+    -fx-pref-width: 130;
 }
 
-#carbohydrates_dose_can_eat_product_table_column:hover {
-    -fx-pref-width: 110;
+#guest_email_column:hover {
+    -fx-pref-width: 130;
+    -fx-background-color: white;
+}
+
+#guest_date_birth_column {
+    -fx-pref-width: 105;
+}
+
+#guest_date_birth_column:hover {
+    -fx-pref-width: 105;
+    -fx-background-color: white;
+}
+
+#guest_passport_column {
+    -fx-pref-width: 136;
+}
+
+#guest_passport_column:hover {
+    -fx-pref-width: 136;
      -fx-background-color: white;
 }

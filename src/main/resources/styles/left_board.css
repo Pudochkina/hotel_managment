@@ -1,12 +1,12 @@
 .root {
-    -fx-background-color: #CCCCFF; /* Цвет фона */
+    -fx-background-color: #cdedf6ff; /* Цвет фона */
     -fx-font-family: Montserrat;
 }
 
 VBox {
     -fx-padding: 5; /* Отступы вокруг элементов */
     -fx-spacing: 5; /* Расстояние между элементами */
-    -fx-background-color: #CCCCFF;
+    -fx-background-color: #cdedf6ff;
 }
 
 Text {
@@ -29,12 +29,22 @@ Label {
 }
 
 Button {
-    -fx-background-color: #97DEC9; /* Цвет фона кнопки */
+    -fx-background-color: #ef7b45ff; /* Цвет фона кнопки */
     -fx-text-fill: black; /* Цвет текста на кнопке */
 }
 
 Button:hover {
-    -fx-background-color: #CCCCFF; /* Цвет фона кнопки при наведении */
+    -fx-background-color: #d84727ff; /* Цвет фона кнопки при наведении */
     -fx-cursor: hand;
 }
 
+#logout_btn {
+    -fx-background-color: #5eb1bfff; /* Цвет фона кнопки */
+    -fx-text-fill: black; /* Цвет текста на кнопке */
+}
+
+#logout_btn:hover {
+     -fx-background-color: #042a2bff; /* Цвет фона кнопки при наведении */
+     -fx-cursor: hand;
+     -fx-text-fill: #cdedf6ff; /* Цвет текста на кнопке */
+}
