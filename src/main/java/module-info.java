@@ -10,5 +10,4 @@ module com.example.calorie_counter_bmi {
     exports com.example.calorie_counter_bmi.models;
     exports com.example.calorie_counter_bmi.controllers.client;
     exports com.example.calorie_counter_bmi.views;
-    exports com.example.calorie_counter_bmi.tests;
 }

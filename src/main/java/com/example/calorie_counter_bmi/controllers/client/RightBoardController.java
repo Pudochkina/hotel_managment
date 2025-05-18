@@ -223,12 +223,12 @@ public class RightBoardController implements Initializable {
          */
         calendar_date_picker.setValue(LocalDate.now());
         chosenDate = calendar_date_picker.getValue().toString();
-        getEatenProductTableView();
+
         calendar_date_picker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 chosenDate = calendar_date_picker.getValue().toString();
-                getEatenProductTableView();
+
                 setEatenDoseLabelView();
             }
         });
@@ -245,7 +245,7 @@ public class RightBoardController implements Initializable {
         /**
          * обработка формы добавления съеденного продукта
          */
-        add_new_dish_btn.setOnAction(new EventHandler<ActionEvent>() {
+        /*add_new_dish_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (index == null){
@@ -286,11 +286,11 @@ public class RightBoardController implements Initializable {
                     setEatenDoseLabelView();
                 }
             }
-        });
+        });*/
         /**
          * обработка кнопки изменить вес
          */
-        edit_users_weight_btn.setOnAction(new EventHandler<ActionEvent>() {
+        /*edit_users_weight_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (!users_weigth_txt_fld.getText().trim().isEmpty() && users_weigth_txt_fld.getText().contains(".")){
@@ -327,70 +327,8 @@ public class RightBoardController implements Initializable {
                     alert.show();
                 }
             }
-        });
-        /**
-         * заполняем таблицу продуктов
-         * и динамический поиск
-         */
-        getProductTableView();
-        /**
-         * обработка кнопки добавить новый продукт
-         */
-        add_new_product_btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                if (!add_new_product_txt_fld.getText().trim().isEmpty() && !new_product_calories_dose_txt_fld.getText().trim().isEmpty()
-                        && !new_product_proteins_dose_txt_fld.getText().trim().isEmpty() && !new_product_fat_dose_txt_fld.getText().trim().isEmpty()
-                        && !new_product_carbohydrates_dose_txt_fld.getText().trim().isEmpty() && !new_product_fiber_dose_txt_fld.getText().trim().isEmpty()){
-                    try {
-                        boolean res = DBUtils.addNewProduct(add_new_product_txt_fld.getText(), Double.valueOf(new_product_calories_dose_txt_fld.getText()), Double.valueOf(new_product_proteins_dose_txt_fld.getText()), Double.valueOf(new_product_fat_dose_txt_fld.getText()), Double.valueOf(new_product_carbohydrates_dose_txt_fld.getText()), Double.valueOf(new_product_fiber_dose_txt_fld.getText()));
-                        if (res){
-                            System.out.println("Product successfully added!");
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setContentText("Product successfully added!");
-                            alert.show();
-                        } else {
-                            System.out.println("Product already exists!");
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("Product already exists!");
-                            alert.show();
-                        }
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    add_new_product_txt_fld.setText("");
-                    new_product_calories_dose_txt_fld.setText("");
-                    new_product_proteins_dose_txt_fld.setText("");
-                    new_product_fat_dose_txt_fld.setText("");
-                    new_product_carbohydrates_dose_txt_fld.setText("");
-                    new_product_fiber_dose_txt_fld.setText("");
-                   getProductTableView();
-                }
-                else if (!RegisterController.checkUsingIsDigitMethod(new_product_calories_dose_txt_fld.getText()) &&
-                        !RegisterController.checkUsingIsDigitMethod(new_product_proteins_dose_txt_fld.getText()) &&
-                        !RegisterController.checkUsingIsDigitMethod(new_product_fat_dose_txt_fld.getText()) &&
-                        !RegisterController.checkUsingIsDigitMethod(new_product_carbohydrates_dose_txt_fld.getText()) &&
-                        !RegisterController.checkUsingIsDigitMethod(new_product_fiber_dose_txt_fld.getText())){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Only numbers allowed!");
-                    alert.show();
-                }
-                else if (!new_product_calories_dose_txt_fld.getText().contains(".") &&
-                                !new_product_proteins_dose_txt_fld.getText().contains(".") &&
-                                !new_product_fat_dose_txt_fld.getText().contains(".") &&
-                                !new_product_carbohydrates_dose_txt_fld.getText().contains(".") &&
-                                !new_product_fiber_dose_txt_fld.getText().contains(".")){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Use a dot!");
-                    alert.show();
-                } else {
-                    System.out.println("Please fill in all information!");
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Please fill in all information to sign up!");
-                    alert.show();
-                }
-            }
-        });
+        });*/
+
         /**
          * обработка кнопки выход из аккаунта
          */
@@ -459,62 +397,11 @@ public class RightBoardController implements Initializable {
         }
         add_new_dish_txt_fld.setText(name_can_eat_product_table_column.getCellData(index).toString());
 
-        product_id = DBUtils.getIdByProductName(add_new_dish_txt_fld.getText());
+        //product_id = DBUtils.getIdByProductName(add_new_dish_txt_fld.getText());
         System.out.println(product_id);
     }
-    /**
-     * заполняем таблицу продуктов
-     * и динамический поиск
-     */
-    public void getProductTableView(){
-        productSearchObservableList = DBUtils.getProductsFromDB();
 
-        name_can_eat_product_table_column.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        calorie_dose_can_eat_product_table_column.setCellValueFactory(new PropertyValueFactory<>("product_calories_perg"));
-        proteins_dose_can_eat_product_table_column.setCellValueFactory(new PropertyValueFactory<>("product_protein_perg"));
-        fat_dose_can_eat_product_table_column.setCellValueFactory(new PropertyValueFactory<>("product_fat_perg"));
-        carbohydrates_dose_can_eat_product_table_column.setCellValueFactory(new PropertyValueFactory<>("product_carbs_perg"));
-        fiber_dose_can_eat_product_table_column.setCellValueFactory(new PropertyValueFactory<>("product_fiber_perg"));
 
-        list_of_products_table_view.setItems(productSearchObservableList);
-
-        FilteredList<Product> filteredList = new FilteredList<>(productSearchObservableList, b -> true);
-
-        search_product_txt_fld.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredList.setPredicate(product -> {
-                if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
-                    return true;
-                }
-                String searchKeyword = newValue.toLowerCase();
-
-                if(product.getProductName().toLowerCase().indexOf(searchKeyword) > -1){
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-
-        });
-
-        SortedList<Product> sortedList = new SortedList<>(filteredList);
-        sortedList.comparatorProperty().bind(list_of_products_table_view.comparatorProperty());
-        list_of_products_table_view.setItems(sortedList);
-    }
-
-    /**
-     * заполняем таблицу съеденных продуктов
-     * за день и по id user
-     */
-    public void getEatenProductTableView(){
-        eatenProductSearchObservableList = DBUtils.getMenuFromDB(chosenDate);
-
-        name_ate_product_table_column.setCellValueFactory(new PropertyValueFactory<EatenProduct, String>("product_name"));
-        amount_ate_product_table_column.setCellValueFactory(new PropertyValueFactory<EatenProduct, Double>("eaten_product_amount"));
-        calories_ate_product_table_column.setCellValueFactory(new PropertyValueFactory<EatenProduct, Double>("eaten_product_calories"));
-
-        users_daily_menu_table_view.setItems(eatenProductSearchObservableList.filtered(eatenProduct -> eatenProduct.getMenu_date().toString().equals(chosenDate)));
-        System.out.println(eatenProductSearchObservableList.isEmpty());
-    }
     /**
      * заполняем кол-во съеденных кбжу
      * за день и по id user

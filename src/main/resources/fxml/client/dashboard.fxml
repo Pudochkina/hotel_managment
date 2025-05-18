@@ -11,15 +11,14 @@
    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="223.0" styleClass="root" stylesheets="@../../styles/left_board.css">
       <VBox layoutX="2.0" layoutY="14.0" prefHeight="379.0" prefWidth="185.0">
          <AnchorPane prefHeight="182.0" prefWidth="198.0">
-            <Text layoutX="35.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login_logo_container"
-                  text="Отель&#10;&quot;Янтарь&quot;"/>
+            <Text layoutX="35.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login_logo_container" text="Отель&#10;&quot;Янтарь&quot;" />
          </AnchorPane>
          <AnchorPane prefHeight="34.0" prefWidth="198.0">
-            <Label fx:id="lbl1"/>
+            <Label fx:id="lbl1" />
          </AnchorPane>
          <AnchorPane prefHeight="34.0" prefWidth="198.0">
-            <Label fx:id="lbl2"/>
-            <Label fx:id="lbl3" layoutX="30.0" text="Вы вошли  как"/>
+            <Label fx:id="lbl2" />
+            <Label fx:id="lbl3" layoutX="30.0" text="Вы вошли  как" />
          </AnchorPane>
          <AnchorPane prefHeight="18.0" prefWidth="154.0">
             <Label fx:id="username_lb" layoutX="32.0" text="Анна" />
@@ -28,24 +27,19 @@
             <Label fx:id="lbl4" />
          </AnchorPane>
          <AnchorPane prefHeight="34.0" prefWidth="198.0">
-            <Button fx:id="guests_menu_btn" layoutX="28.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0"
-                    prefWidth="142.0" text="Гости" textAlignment="CENTER"/>
+            <Button fx:id="guests_menu_btn" layoutX="28.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="142.0" text="Гости" textAlignment="CENTER" />
          </AnchorPane>
          <AnchorPane prefHeight="34.0" prefWidth="198.0">
-            <Button fx:id="rooms_menu_btn" layoutX="28.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0"
-                    prefWidth="142.0" text="Номера" textAlignment="CENTER"/>
+            <Button fx:id="rooms_menu_btn" layoutX="28.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="142.0" text="Номера" textAlignment="CENTER" />
          </AnchorPane>
          <AnchorPane prefHeight="34.0" prefWidth="198.0">
-            <Button fx:id="services_menu_btn" layoutX="28.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0"
-                    prefWidth="142.0" text="Услуги" textAlignment="CENTER"/>
+            <Button fx:id="services_menu_btn" layoutX="28.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="142.0" text="Услуги" textAlignment="CENTER" />
          </AnchorPane>
          <AnchorPane prefHeight="34.0" prefWidth="198.0">
-            <Button fx:id="reservation_menu_btn" layoutX="28.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0"
-                    prefWidth="142.0" text="Бронь" textAlignment="CENTER"/>
+            <Button fx:id="reservation_menu_btn" layoutX="28.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="142.0" text="Бронь" textAlignment="CENTER" />
          </AnchorPane>
          <AnchorPane prefHeight="34.0" prefWidth="198.0">
-            <Button fx:id="payments_menu_btn" layoutX="28.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0"
-                    prefWidth="142.0" text="Архив" textAlignment="CENTER"/>
+            <Button fx:id="payments_menu_btn" layoutX="28.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="142.0" text="Архив" textAlignment="CENTER" />
          </AnchorPane>
       </VBox>
       <VBox layoutX="35.0" layoutY="658.0" prefHeight="41.0" prefWidth="152.0">
