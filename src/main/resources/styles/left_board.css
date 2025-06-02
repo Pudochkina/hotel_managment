@@ -48,3 +48,13 @@ Button:hover {
      -fx-cursor: hand;
      -fx-text-fill: #cdedf6ff; /* Цвет текста на кнопке */
 }
+
+/* Стиль для активной (выбранной) кнопки */
+.sidebar-button.active {
+    -fx-background-color: #d84727ff;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-border-color: #97DEC9;
+    -fx-border-width: 0 0 0 3px;
+    -fx-border-insets: 0 0 0 -3px;
+}

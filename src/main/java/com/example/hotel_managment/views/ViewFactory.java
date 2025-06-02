@@ -1,7 +1,7 @@
-package com.example.calorie_counter_bmi.views;
+package com.example.hotel_managment.views;
 
-import com.example.calorie_counter_bmi.DBUtils;
-import com.example.calorie_counter_bmi.controllers.client.RightBoardController;
+import com.example.hotel_managment.controllers.client.MainController;
+import com.example.hotel_managment.db.DBUtilsGuest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,16 +24,10 @@ public class ViewFactory {
         createStage(loader);
     }
 
-    public void showCenterWindow() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/right_product_dashboard.fxml"));
+    public void showMainWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/main.fxml"));
         createStage(loader);
     }
-
-    public void showGuestWindow() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/dashboard_guests.fxml"));
-        createStage(loader);
-    }
-
     public void createStage(FXMLLoader loader){
         Scene scene = null;
         try {
@@ -43,7 +37,7 @@ public class ViewFactory {
         }
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Calorie Counter");
+        stage.setTitle("Отель Янтарь");
         stage.show();
         stage.setResizable(false);
     }
@@ -52,14 +46,14 @@ public class ViewFactory {
         stage.close();
     }
 
-    public static void changeSceneFromLogInToCenterBoard (ActionEvent event, String fxmlFile, String title, String username, int id, Double weight, Double calories, Double proteins, Double carbo, Double fat, Double fiber){
+    public static void changeScene(ActionEvent event, String fxmlFile, String title, String username){
         Parent root = null;
         if (username != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+                FXMLLoader loader = new FXMLLoader(DBUtilsGuest.class.getResource(fxmlFile));
                 root = loader.load();
-                RightBoardController rightBoardController = loader.getController();
-                rightBoardController.setUserInformation(id, username, weight, calories, proteins, carbo, fat, fiber);
+                MainController mainController = loader.getController();
+                mainController.setSidebarUsername(username);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -77,4 +71,6 @@ public class ViewFactory {
         stage.setY(20);
         stage.show();
     }
+
+
 }

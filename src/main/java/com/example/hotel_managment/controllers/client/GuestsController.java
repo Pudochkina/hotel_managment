@@ -1,8 +1,10 @@
-package com.example.calorie_counter_bmi.controllers.client;
+package com.example.hotel_managment.controllers.client;
 
-import com.example.calorie_counter_bmi.DBUtils;
-import com.example.calorie_counter_bmi.controllers.FieldValidator;
-import com.example.calorie_counter_bmi.models.Guest;
+import com.example.hotel_managment.db.DBUtilsGuest;
+import com.example.hotel_managment.controllers.FieldValidator;
+import com.example.hotel_managment.db.DBUtilsGuest;
+import com.example.hotel_managment.models.Guest;
+import com.example.hotel_managment.views.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -21,33 +24,15 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class DashboardGuestsController implements Initializable {
-    public TextField search_guest_txt_fld;
+public class GuestsController implements Initializable {
+    public TextField search_guest_txt_fld, add_new_fio_txt_fld, new_phone_txt_fld, new_email_txt_fld, new_passport_txt_fld;
     public TableView<Guest> list_of_guests_table_view;
-    public TableColumn<Guest, String> guest_fio_column;
-    public TableColumn<Guest, String> guest_phone_column;
-    public TableColumn<Guest, String> guest_email_column;
+    public TableColumn<Guest, String> guest_fio_column, guest_phone_column, guest_email_column, guest_passport_column;
     public TableColumn<Guest, java.sql.Date> guest_date_birth_column;
-    public TableColumn<Guest, String> guest_passport_column;
-    public TextField add_new_fio_txt_fld;
-    public Button add_new_guest_btn;
-    public TextField new_phone_txt_fld;
-    public TextField new_email_txt_fld;
-    public TextField new_passport_txt_fld;
+    public TableColumn<Guest, Integer> guest_id_column;
+    public Button add_new_guest_btn, update_guest_btn, delete_guest_btn;
     public DatePicker calendar_date_picker;
-    public Button update_guest_btn;
-    public Button delete_guest_btn;
-    public Label username_lbl;
-    public Button guests_menu_btn;
-    public Button rooms_menu_btn;
-    public Button services_menu_btn;
-    public Button reservation_menu_btn;
-    public Button payments_menu_btn;
-    public Button logout_btn;
-    /**
-     * фио и телефон гостя, данные которого хотят обновить
-     */
-    String currentFIO, currentPHONE;
+
     /**
      * id гостя, для отображения данных о госте в форме
      */
@@ -89,7 +74,6 @@ public class DashboardGuestsController implements Initializable {
             }
         });
 
-
         /**
          * обработка кнопки добавить нового гостя
          */
@@ -127,7 +111,7 @@ public class DashboardGuestsController implements Initializable {
 
                 // Если все поля прошли валидацию, пробуем добавить гостя
                 try {
-                    boolean res = DBUtils.addNewGuest(
+                    boolean res = DBUtilsGuest.addNewGuest(
                             add_new_fio_txt_fld.getText(),
                             new_phone_txt_fld.getText(),
                             new_email_txt_fld.getText(),
@@ -162,7 +146,7 @@ public class DashboardGuestsController implements Initializable {
         /**
          * обработка кнопки обновить информацию о госте
          */
-       update_guest_btn.setOnAction(new EventHandler<ActionEvent>() {
+        update_guest_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 // Сначала проверяем валидность каждого поля по отдельности
@@ -196,27 +180,21 @@ public class DashboardGuestsController implements Initializable {
 
                 // Если все поля прошли валидацию, пробуем добавить гостя
                 try {
-                    boolean res = DBUtils.updateGuest(currentFIO, currentPHONE,
-                            add_new_fio_txt_fld.getText(),
-                            new_phone_txt_fld.getText(),
-                            new_email_txt_fld.getText(),
-                            chosenDate,
-                            new_passport_txt_fld.getText()
+                    boolean res = DBUtilsGuest.updateGuest(guest_id, add_new_fio_txt_fld.getText(),
+                            new_phone_txt_fld.getText(), new_email_txt_fld.getText(), chosenDate, new_passport_txt_fld.getText()
                     );
-
+                    System.out.println(new_phone_txt_fld.getText());
                     if (res) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setContentText("Информация о госте успешно обновлена!");
                         alert.show();
-
+                        getGuestsTableView();
                         // Очищаем поля
                         add_new_fio_txt_fld.setText("");
                         new_phone_txt_fld.setText("");
                         new_email_txt_fld.setText("");
                         new_passport_txt_fld.setText("");
                         calendar_date_picker.setValue(LocalDate.now());
-
-                        getGuestsTableView();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("Гость уже существует!");
@@ -265,7 +243,7 @@ public class DashboardGuestsController implements Initializable {
 
                 // Если все поля прошли валидацию, пробуем добавить гостя
                 try {
-                    boolean res = DBUtils.deleteGuest(guest_id);
+                    boolean res = DBUtilsGuest.deleteGuest(guest_id);
                     if (res) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setContentText("Информация о госте успешно удалена!");
@@ -296,7 +274,7 @@ public class DashboardGuestsController implements Initializable {
      * и динамический поиск
      */
     public void getGuestsTableView() {
-        guestSearchObservableList = DBUtils.getGuestsFromDB();
+        guestSearchObservableList = DBUtilsGuest.getGuestsFromDB();
 
         guest_fio_column.setCellValueFactory(new PropertyValueFactory<>("guestFIO"));
         guest_phone_column.setCellValueFactory(new PropertyValueFactory<>("guest_phone"));
@@ -339,16 +317,16 @@ public class DashboardGuestsController implements Initializable {
         if (index <= -1) {
             return;
         }
-        add_new_fio_txt_fld.setText(guest_fio_column.getCellData(index).toString());
-        new_phone_txt_fld.setText(guest_phone_column.getCellData(index).toString());
-        new_email_txt_fld.setText(guest_email_column.getCellData(index).toString());
-        new_passport_txt_fld.setText(guest_passport_column.getCellData(index).toString());
+        add_new_fio_txt_fld.setText(guest_fio_column.getCellData(index));
+        new_phone_txt_fld.setText(guest_phone_column.getCellData(index));
+        new_email_txt_fld.setText(guest_email_column.getCellData(index));
+        new_passport_txt_fld.setText(guest_passport_column.getCellData(index));
 
         java.sql.Date utilDate = guest_date_birth_column.getCellData(index);
         LocalDate date = utilDate.toLocalDate();
         calendar_date_picker.setValue(date);
 
-        guest_id = DBUtils.getIdByGuestPhone(new_phone_txt_fld.getText());
+        guest_id = DBUtilsGuest.getIdByGuestPhone(new_phone_txt_fld.getText());
         System.out.println(guest_id);
     }
 }

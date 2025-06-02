@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="705.0" stylesheets="@../../styles/right._board.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel_managment.controllers.client.TypeOfRoomController">
+   <AnchorPane layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="703.0" stylesheets="@../../styles/center_board.css">
+      <children>
+         <VBox layoutX="2.0" prefHeight="700.0" prefWidth="703.0" styleClass="root" stylesheets="@../../styles/center_board.css">
+            <children>
+               <AnchorPane prefHeight="46.0" prefWidth="502.0" />
+               <AnchorPane prefHeight="267.0" prefWidth="695.0" stylesheets="@../../styles/center_board.css">
+                  <children>
+                     <TableView fx:id="list_of_types_of_rooms_table_view" layoutY="-1.0" onMouseClicked="#getItem" prefHeight="330.0" prefWidth="703.0">
+                       <columns>
+                         <TableColumn fx:id="type_of_room_column" prefWidth="195.1999969482422" text="Тип номера" />
+                           <TableColumn fx:id="type_of_room_descr_column" prefWidth="261.5999755859375" text="Описание" />
+                           <TableColumn fx:id="room_capacity_column" prefWidth="110.4000244140625" text="Вместимость" />
+                           <TableColumn fx:id="type_of_room_cost_column" prefWidth="132.800048828125" text="Стоимость" />
+                           <TableColumn fx:id="type_of_room_id_column" minWidth="8.0" prefWidth="8.0" text="Id" />
+                       </columns>
+                     </TableView>
+                  </children>
+               </AnchorPane>
+               <AnchorPane prefHeight="328.0" prefWidth="722.0">
+                  <children>
+                     <Text layoutX="26.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Тип номера:" />
+                     <TextField fx:id="type_of_room_descr_txt_fld" layoutX="158.0" layoutY="73.0" prefHeight="26.0" prefWidth="462.0" promptText="..." styleClass="input_field" />
+                     <Button fx:id="add_new_type_of_room_btn" layoutX="440.0" layoutY="215.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Создать" textAlignment="CENTER" />
+                     <Label layoutX="193.0" layoutY="14.0" text="Добавить/Изменить/Удалить тип номера">
+                        <font>
+                           <Font name="Consolas" size="14.0" />
+                        </font></Label>
+                     <Text layoutX="26.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Описание:&#10;" wrappingWidth="114.80400085449219" />
+                     <Text layoutX="21.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вместимость:" textAlignment="CENTER" wrappingWidth="114.80400085449219" />
+                     <Text layoutX="29.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Стоимость:" wrappingWidth="89.56561279296875" />
+                     <TextField fx:id="type_of_room_cost_txt_fld" layoutX="158.0" layoutY="162.0" prefHeight="26.0" prefWidth="148.0" promptText="..." styleClass="input_field_add_product" />
+                     <Button fx:id="update_type_of_room_btn" layoutX="292.0" layoutY="215.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Обновить" textAlignment="CENTER" />
+                     <Button fx:id="delete_type_of_room_btn" layoutX="159.0" layoutY="215.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Удалить" textAlignment="CENTER" />
+                     <TextField fx:id="type_of_room_txt_fld1" layoutX="158.0" layoutY="38.0" prefHeight="26.0" prefWidth="462.0" promptText="..." styleClass="input_field" />
+                     <Spinner fx:id="type_of_room_capacity_spinner" layoutX="159.0" layoutY="117.0" />
+                  </children>
+               </AnchorPane>
+            </children>
+         </VBox>
+      </children>
+   </AnchorPane>
+</AnchorPane>

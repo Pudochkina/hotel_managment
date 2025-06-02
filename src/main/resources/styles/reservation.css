@@ -1,0 +1,150 @@
+/* Основные стили */
+.root {
+    -fx-background-color: white;
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 14px;
+}
+
+/* Текстовые поля */
+.input_field, .input_field_guest_fio {
+    -fx-background-color: white;
+    -fx-border-color: #97DEC9;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1.5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-pref-height: 35px;
+}
+
+.input_field:focused, .input_field_guest_fio:focused {
+    -fx-border-color: #CCCCFF;
+}
+
+/* Кнопки */
+Button {
+    -fx-background-color: #97DEC9;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+Button:hover {
+    -fx-background-color: #CCCCFF;
+    -fx-cursor: hand;
+}
+
+Button:pressed {
+    -fx-background-color: #97DEC9;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 1);
+}
+
+/* Таблицы */
+TableView {
+    -fx-background-color: white;
+    -fx-border-color: #97DEC9;
+    -fx-border-radius: 5px;
+    -fx-padding: 2px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #CCCCFF;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f5f5f5;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #97DEC9;
+    -fx-text-fill: black;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #97DEC9;
+    -fx-border-radius: 4px;
+    -fx-mark-color: #97DEC9;
+}
+
+.combo-box:hover {
+    -fx-border-color: #CCCCFF;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: black;
+}
+
+.combo-box .list-view {
+    -fx-background-color: white;
+    -fx-border-color: #97DEC9;
+}
+
+/* DatePicker */
+.date-picker {
+    -fx-background-color: white;
+    -fx-border-color: #97DEC9;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #97DEC9;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #CCCCFF;
+}
+
+/* Тексты и метки */
+Text, Label {
+    -fx-fill: black;
+    -fx-font-family: "Montserrat";
+}
+
+Label {
+    -fx-font-weight: bold;
+}
+
+/* Специфичные элементы */
+#search_guest_txt_fld {
+    -fx-pref-width: 506px;
+}
+
+#guest_fio_txt_fld {
+    -fx-pref-width: 255px;
+}
+
+/* Заголовки таблиц */
+#guest_fio_column, #guest_phone_column, #guest_email_column,
+#guest_date_birth_column, #guest_passport_column,
+#number_of_room_tbl_clmn, #capacity_of_room_tbl_clmn,
+#cost_of_room_tbl_clmn {
+    -fx-background-color: #CCCCFF;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+
+/* Специальные стили для кнопок действий */
+#add_new_reservation_btn {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+#find_available_rooms_btn {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+
+#add_new_reservation_btn:hover, #find_available_rooms_btn:hover {
+    -fx-background-color: #CCCCFF;
+    -fx-text-fill: black;
+}

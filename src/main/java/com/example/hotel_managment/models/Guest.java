@@ -1,4 +1,4 @@
-package com.example.calorie_counter_bmi.models;
+package com.example.hotel_managment.models;
 
 import java.util.Date;
 

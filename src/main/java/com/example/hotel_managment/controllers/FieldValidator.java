@@ -1,4 +1,4 @@
-package com.example.calorie_counter_bmi.controllers;
+package com.example.hotel_managment.controllers;
 
 import java.util.regex.Pattern;
 

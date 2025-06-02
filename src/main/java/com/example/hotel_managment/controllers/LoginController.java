@@ -1,7 +1,8 @@
-package com.example.calorie_counter_bmi.controllers;
+package com.example.hotel_managment.controllers;
 
-import com.example.calorie_counter_bmi.DBUtils;
-import com.example.calorie_counter_bmi.models.Model;
+import com.example.hotel_managment.db.DBUtilsGuest;
+import com.example.hotel_managment.db.DBUtilsSecurity;
+import com.example.hotel_managment.models.Model;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
@@ -15,11 +16,8 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
     public Label error_text_fld;
-    public TextField username_txt_fld;
-    public TextField password_txt_fld;
-    public Button login_btn;
-    public Button clear_btn;
-    public Button register_btn;
+    public TextField username_txt_fld, password_txt_fld;
+    public Button login_btn, clear_btn, register_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,7 +35,7 @@ public class LoginController implements Initializable {
         login_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                DBUtils.logInUser(actionEvent, username_txt_fld.getText(), password_txt_fld.getText());
+                DBUtilsSecurity.logInUser(actionEvent, username_txt_fld.getText(), password_txt_fld.getText());
             }
         });
     }

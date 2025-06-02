@@ -10,6 +10,13 @@
     -fx-font-size: 1em;
     -fx-font-family: Montserrat;
 }
+.input_field_guest_fio {
+    -fx-background-color: white;
+    -fx-pref-height: 35;
+    -fx-pref-width: 262;
+    -fx-font-size: 1em;
+    -fx-font-family: Montserrat;
+}
 
 .input_field_add_product {
     -fx-background-color: white;
@@ -36,11 +43,17 @@ Label {
     -fx-font-weight: bold;
 }
 
+Text {
+    -fx-font-size: 16px; /* Размер шрифта */
+    -fx-text-fill: black; /* Цвет текста */
+    -fx-font-family: Consolas;
+    -fx-font-weight: bold;
+}
+
 #guest_fio_column, #guest_phone_column, #guest_email_column, #guest_date_birth_column, #guest_passport_column {
     -fx-font-size: 12px;
     -fx-text-fill: #333333;
     -fx-font-family: Montserrat;
-    -fx-background-color: #cdedf6ff;
     -fx-alignment: CENTER;
 }
 

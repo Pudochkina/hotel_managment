@@ -1,6 +1,6 @@
-package com.example.calorie_counter_bmi.models;
+package com.example.hotel_managment.models;
 
-import com.example.calorie_counter_bmi.views.ViewFactory;
+import com.example.hotel_managment.views.ViewFactory;
 
 public class Model {
 
