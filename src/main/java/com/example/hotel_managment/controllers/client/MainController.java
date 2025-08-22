@@ -1,12 +1,13 @@
 package com.example.hotel_managment.controllers.client;
 
+import com.example.hotel_managment.db.DBUtilsSecurity;
+import com.example.hotel_managment.models.User;
 import com.example.hotel_managment.views.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -32,27 +33,21 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadDefaultContent();
-        //setupButtonActions();
 
-        /**
-         * обработка кнопки выход из аккаунта
-         */
+        if (DBUtilsSecurity.retrRole.equals("MANAGER")){
+            rooms_menu_btn.setVisible(false);
+            type_of_rooms_menu_btn1.setVisible(false);
+            payments_menu_btn.setVisible(false);
+            services_menu_btn.setVisible(false);
+        }
+        loadDefaultContent();
+
         logout_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 ViewFactory.changeScene(actionEvent, "/fxml/login.fxml", "Log In", null);
             }
         });
-    }
-
-    private void setupButtonActions() {
-        guests_menu_btn.setOnAction(e -> loadContent("/fxml/client/guests.fxml"));
-        rooms_menu_btn.setOnAction(e -> loadContent("/fxml/client/rooms.fxml"));
-        services_menu_btn.setOnAction(e -> loadContent("/fxml/client/services.fxml"));
-        reservation_menu_btn.setOnAction(e -> loadContent("/fxml/client/reservation.fxml"));
-        type_of_rooms_menu_btn1.setOnAction(e -> loadContent("/fxml/client/type_of_rooms.fxml"));
-        reservation_update_menu_btn1.setOnAction(e -> loadContent("/fxml/client/payment.fxml"));
     }
 
     public void loadContent(String fxmlPath) {
@@ -66,7 +61,7 @@ public class MainController implements Initializable {
     }
 
     private void loadDefaultContent() {
-        loadContent("/fxml/client/guests.fxml");
+        loadContent("/fxml/client/start.fxml");
     }
 
     public void setSidebarUsername(String username) {
@@ -105,6 +100,9 @@ public class MainController implements Initializable {
                 break;
             case "reservation_update_menu_btn1":
                 loadContent("/fxml/client/payment.fxml");
+                break;
+            case "payments_menu_btn":
+                loadContent("/fxml/client/rep1.fxml");
                 break;
         }
     }

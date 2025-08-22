@@ -23,7 +23,7 @@
                         <font>
                            <Font name="System Bold" size="12.0" />
                         </font></Label>
-                     <TextField fx:id="search_reservation_txt_fld" layoutX="181.0" layoutY="1.0" prefHeight="26.0" prefWidth="506.0" promptText="..." styleClass="input_field" />
+                     <TextField fx:id="search_reservation_txt_fld" layoutX="181.0" layoutY="4.0" prefHeight="26.0" prefWidth="506.0" promptText="..." styleClass="input_field" />
                   </children>
                </AnchorPane>
                <AnchorPane prefHeight="263.0" prefWidth="780.0" stylesheets="@../../styles/center_board.css">
@@ -48,7 +48,7 @@
                      <Text layoutX="37.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ФИО:" />
                      <TextField fx:id="guest_fio_txt_fld" layoutX="84.0" layoutY="32.0" prefHeight="26.0" prefWidth="255.0" promptText="..." styleClass="input_field_guest_fio" />
                      <Button fx:id="add_new_payment_btn" layoutX="605.0" layoutY="357.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="152.0" text="Оплатить" textAlignment="CENTER" />
-                     <Label layoutX="244.0" layoutY="14.0" text="Изменить/Удалить/Оплатить бронь">
+                     <Label layoutX="274.0" layoutY="14.0" text="Модифицировать данные брони">
                         <font>
                            <Font name="Consolas" size="14.0" />
                         </font></Label>
@@ -76,6 +76,8 @@
                      <Button fx:id="delete_reservation_btn" layoutX="290.0" layoutY="357.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Удалить" textAlignment="CENTER" />
                      <Text layoutX="343.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Суммма оплаты:" />
                      <TextField fx:id="sum_txt_fld" layoutX="494.0" layoutY="292.0" prefHeight="26.0" prefWidth="223.0" promptText="..." styleClass="input_field_guest_fio" />
+                     <Text layoutX="38.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="№ комнаты:" wrappingWidth="92.78750610351562" />
+                     <TextField fx:id="room_num_txt_fld1" layoutX="131.0" layoutY="318.0" prefHeight="26.0" prefWidth="130.0" promptText="..." styleClass="input_field_guest_fio" />
                   </children>
                </AnchorPane>
             </children>

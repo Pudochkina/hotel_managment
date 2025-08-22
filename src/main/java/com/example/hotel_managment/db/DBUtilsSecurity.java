@@ -12,7 +12,7 @@ public class DBUtilsSecurity {
 
     /** роль пользователя который зашел в систему
      * */
-    public static String retrRole;
+    public static String retrRole = "ADMIN";
 
     /** метод отвечающий за регистрацию пользователя
      * */
@@ -108,6 +108,7 @@ public class DBUtilsSecurity {
             } else {
                 while (resultSet.next()){
                     retrRole = resultSet.getString("role");
+                    System.out.println(User.Role.valueOf(retrRole));
                     String retrievedPassword = resultSet.getString("password");
                     if (BCrypt.checkpw(password, retrievedPassword)) {
                         ViewFactory.changeScene(event, "/fxml/client/main.fxml", "Отель Янтарь", username);

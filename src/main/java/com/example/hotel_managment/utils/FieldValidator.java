@@ -1,4 +1,4 @@
-package com.example.hotel_managment.controllers;
+package com.example.hotel_managment.utils;
 
 import java.util.regex.Pattern;
 
@@ -18,6 +18,12 @@ public class FieldValidator {
         return Pattern.matches(regex, phone);
     }
 
+    public static boolean isValidText(String text) {
+        // Паттерн: буквы (рус/англ), цифры, пробелы, дефисы, апострофы, кавычки, скобки
+        String regex = "^[a-zA-Zа-яА-ЯёЁ0-9\\s\\-'’\"()\\[\\]{}]{1,255}$";
+        return Pattern.matches(regex, text);
+    }
+
     // Метод для проверки email
     public static boolean isValidEmail(String email) {
         // Стандартный паттерн для email
@@ -30,5 +36,11 @@ public class FieldValidator {
         // Паттерн: 4 цифры, пробел, 6 цифр
         String regex = "^\\d{4}\\s\\d{6}$";
         return Pattern.matches(regex, passport);
+    }
+
+    public static boolean isValidNumber(String number) {
+        // Паттерн: цифры, не начинающиеся с нуля, минимум 1 цифра
+        String regex = "^[1-9]\\d*$";
+        return Pattern.matches(regex, number);
     }
 }

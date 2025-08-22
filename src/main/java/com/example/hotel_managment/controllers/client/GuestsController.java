@@ -1,10 +1,9 @@
 package com.example.hotel_managment.controllers.client;
 
 import com.example.hotel_managment.db.DBUtilsGuest;
-import com.example.hotel_managment.controllers.FieldValidator;
-import com.example.hotel_managment.db.DBUtilsGuest;
+import com.example.hotel_managment.db.DBUtilsSecurity;
+import com.example.hotel_managment.utils.FieldValidator;
 import com.example.hotel_managment.models.Guest;
-import com.example.hotel_managment.views.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -55,6 +53,10 @@ public class GuestsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        if (DBUtilsSecurity.retrRole.equals("MANAGER")){
+            delete_guest_btn.setVisible(false);
+        }
         /**
          * заполняем таблицу гостей
          * и динамический поиск
@@ -195,6 +197,7 @@ public class GuestsController implements Initializable {
                         new_email_txt_fld.setText("");
                         new_passport_txt_fld.setText("");
                         calendar_date_picker.setValue(LocalDate.now());
+                        guest_id = null;
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("Гость уже существует!");
@@ -255,7 +258,7 @@ public class GuestsController implements Initializable {
                         new_email_txt_fld.setText("");
                         new_passport_txt_fld.setText("");
                         calendar_date_picker.setValue(LocalDate.now());
-
+                        guest_id = null;
                         getGuestsTableView();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -23,7 +23,8 @@ public class DBUtilsGuest {
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_managment_system", "root", "qwerty1234");
-            getGuest = connection.prepareStatement("SELECT guest_id, guest_fio, guest_phone, guest_email, guest_date_birth, guest_passport FROM guest ORDER BY guest_fio ASC");
+            getGuest = connection.prepareStatement("SELECT guest_id, guest_fio, guest_phone, guest_email," +
+                    " guest_date_birth, guest_passport FROM guest ORDER BY guest_fio ASC");
             queryOutput = getGuest.executeQuery();
 
             while (queryOutput.next()) {

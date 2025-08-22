@@ -84,6 +84,7 @@ public class DBUtilsReservation {
     public static boolean addNewReservation(Integer guest_id, Integer service_id, Integer room_id, Date date_in, Date date_out) throws SQLException {
         Connection connection = null;
         PreparedStatement psInsert = null;
+        PreparedStatement psUpdate = null;
         PreparedStatement psCheckGuestExist = null;
         ResultSet resultSet = null;
         boolean success = false;
@@ -113,6 +114,10 @@ public class DBUtilsReservation {
                 psInsert.setDate(5, date_out);
                 psInsert.executeUpdate();
                 System.out.println("Reservation successfully added!");
+
+                psUpdate = connection.prepareStatement( "UPDATE room SET room_status = 'Занят' WHERE room_id = ?");
+                psUpdate.setInt(1, room_id);
+                psUpdate.executeUpdate();
                 success = true;
             }
         } catch (SQLException e) {
@@ -179,6 +184,7 @@ public class DBUtilsReservation {
             } else {
                 System.out.println("No reservation was updated (ID might not exist)");
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -201,41 +207,39 @@ public class DBUtilsReservation {
         return success;
     }
 
-
-    public static Integer findReservationByIds(Integer guest_id, Integer service_id, Integer room_id, Date dateIn, Date dateOut) {
-        Integer p_id = null;
+    /**
+     * метод отвечающий за удаление брони из бд
+     */
+    public static boolean deleteReservation(Integer id) throws SQLException {
         Connection connection = null;
-        PreparedStatement getRoomId = null;
-        ResultSet queryOutput = null;
+        PreparedStatement deleteGuest = null;
+        ResultSet resultSet = null;
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_managment_system", "root", "qwerty1234");
-            getRoomId = connection.prepareStatement("SELECT reservation_id FROM reservation WHERE guest_id = ?, service_id = ?, " +
-                    "room_id = ?, date_in = ?, date_out = ?");
-            getRoomId.setInt(1, guest_id);
-            getRoomId.setInt(2, service_id);
-            getRoomId.setInt(3, room_id);
-            getRoomId.setDate(4, dateIn);
-            getRoomId.setDate(5, dateOut);
-            queryOutput = getRoomId.executeQuery();
-
-            while (queryOutput.next()) {
-                Integer queryReservationId = queryOutput.getInt("reservation_id");
-                p_id = queryReservationId;
-            }
+            deleteGuest = connection.prepareStatement("DELETE FROM reservation WHERE reservation_id = ?");
+            deleteGuest.setInt(1, id);
+            deleteGuest.executeUpdate();
+            System.out.println("Reservation deleted!");
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Бронь нельзя удалить!");
+            alert.show();
+            throw ex;
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
-            if (queryOutput != null) {
+            if (resultSet != null) {
                 try {
-                    queryOutput.close();
+                    resultSet.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
-            if (getRoomId != null) {
+            if (deleteGuest != null) {
                 try {
-                    getRoomId.close();
+                    deleteGuest.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -248,7 +252,73 @@ public class DBUtilsReservation {
                 }
             }
         }
-        return p_id;
+        if (deleteGuest.isClosed()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * метод отвечающий за оплату брони в бд
+     */
+    public static boolean SendReservationToPayments(Integer reservation_id, Integer sum, Date date, String method) throws SQLException {
+        Connection connection = null;
+        PreparedStatement psCheckGuestExist = null;
+        PreparedStatement psInsert = null;
+        boolean success = false;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_managment_system", "root", "qwerty1234");
+            psCheckGuestExist = connection.prepareStatement("UPDATE reservation r JOIN room rm " +
+                    "ON r.room_id = rm.room_id SET r.reservation_status = 'Оплачено', "
+                    + "rm.room_status = 'Свободен' WHERE r.reservation_id = ?");
+            psCheckGuestExist.setInt(1, reservation_id);
+            int rowsAffected = psCheckGuestExist.executeUpdate();
+            // If at least one row was updated, consider it successful
+            success = rowsAffected > 0;
+
+            if (success) {
+                System.out.println("Reservation successfully paid!");
+            } else {
+                System.out.println("No reservation was paid (ID might not exist)");
+            }
+
+            psInsert = connection.prepareStatement("INSERT INTO payment (reservation_id, payment_amount, payment_date, payment_method) VALUES (?, ?, ?, ?)");
+            psInsert.setInt(1, reservation_id);
+            psInsert.setInt(2, sum);
+            psInsert.setDate(3, date);
+            psInsert.setString(4, method);
+            psInsert.executeUpdate();
+            System.out.println("Payment successfully added!");
+            success = true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (psCheckGuestExist != null) {
+                try {
+                    psCheckGuestExist.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }  if (psInsert != null) {
+                try {
+                    psInsert.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return success;
     }
 }
 

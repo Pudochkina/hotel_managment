@@ -39,18 +39,18 @@
                <AnchorPane prefHeight="322.0" prefWidth="619.0">
                   <children>
                      <Text layoutX="30.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Наименование:" wrappingWidth="152.0" />
-                     <TextField fx:id="add_new_service_txt_fld" layoutX="30.0" layoutY="67.0" prefHeight="26.0" prefWidth="446.0" promptText="..." styleClass="input_field" />
-                     <Button fx:id="add_new_service_btn" layoutX="404.0" layoutY="285.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Создать" textAlignment="CENTER" />
+                     <TextField fx:id="add_new_service_txt_fld" layoutX="144.0" layoutY="35.0" prefHeight="26.0" prefWidth="446.0" promptText="..." styleClass="input_field" />
+                     <Button fx:id="add_new_service_btn" layoutX="384.0" layoutY="148.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Создать" textAlignment="CENTER" />
                      <Label layoutX="175.0" layoutY="14.0" text="Добавить/Изменить/Удалить услугу">
                         <font>
                            <Font name="Consolas" size="14.0" />
                         </font></Label>
-                     <Text layoutX="30.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Тип:&#10;" wrappingWidth="92.71199798583973" />
-                     <Text layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Стоимость:" textAlignment="CENTER" wrappingWidth="112.80002441406259" />
-                     <TextField fx:id="new_service_type_txt_fld" layoutX="158.0" layoutY="102.0" prefHeight="23.0" prefWidth="150.0" promptText="..." styleClass="input_field_add_product" />
-                     <TextField fx:id="new_service_cost_txt_fld" layoutX="158.0" layoutY="141.0" prefHeight="18.0" prefWidth="86.0" promptText="..." styleClass="input_field_add_product" />
-                     <Button fx:id="update_service_btn" layoutX="256.0" layoutY="285.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Обновить" textAlignment="CENTER" />
-                     <Button fx:id="delete_service_btn" layoutX="123.0" layoutY="285.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Удалить" textAlignment="CENTER" />
+                     <Text layoutX="107.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Тип:&#10;" wrappingWidth="39.91201019287098" />
+                     <Text layoutX="53.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Стоимость:" textAlignment="CENTER" wrappingWidth="92.71199798583979" />
+                     <TextField fx:id="new_service_type_txt_fld" layoutX="145.0" layoutY="70.0" prefHeight="23.0" prefWidth="150.0" promptText="..." styleClass="input_field_add_product" />
+                     <TextField fx:id="new_service_cost_txt_fld" layoutX="146.0" layoutY="100.0" prefHeight="18.0" prefWidth="86.0" promptText="..." styleClass="input_field_add_product" />
+                     <Button fx:id="update_service_btn" layoutX="236.0" layoutY="148.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Обновить" textAlignment="CENTER" />
+                     <Button fx:id="delete_service_btn" layoutX="103.0" layoutY="148.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Удалить" textAlignment="CENTER" />
                   </children>
                </AnchorPane>
             </children>

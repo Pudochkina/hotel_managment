@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" spacing="10" stylesheets="@../../styles/right._board.css" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.hotel_managment.controllers.client.ReportController">
+    <Label text="Отчет о прибыли за месяц" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10">
+        <Button text="Обновить отчет" onAction="#refreshReport"/>
+        <Button text="Экспорт в PDF" onAction="#exportToPdf"/>
+    </HBox>
+
+    <Label text="Доход от номеров:" style="-fx-font-weight: bold;"/>
+    <TableView fx:id="roomsTable">
+        <columns>
+            <TableColumn fx:id="roomTypeColumn" text="Тип номера">
+                <cellValueFactory>
+                    <PropertyValueFactory property="itemName" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="roomBookingsColumn" text="Кол-во бронирований">
+                <cellValueFactory>
+                    <PropertyValueFactory property="count" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="roomRevenueColumn" text="Сумма дохода">
+                <cellValueFactory>
+                    <PropertyValueFactory property="formattedAmount" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <Label text="Доход от услуг:" style="-fx-font-weight: bold;"/>
+    <TableView fx:id="servicesTable">
+        <columns>
+            <TableColumn fx:id="serviceNameColumn" text="Название услуги">
+                <cellValueFactory>
+                    <PropertyValueFactory property="itemName" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="serviceOrdersColumn" text="Кол-во заказов">
+                <cellValueFactory>
+                    <PropertyValueFactory property="count" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="serviceRevenueColumn" text="Сумма дохода">
+                <cellValueFactory>
+                    <PropertyValueFactory property="formattedAmount" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Label text="Общий доход за месяц:" style="-fx-font-weight: bold;"/>
+        <Label fx:id="totalRevenueLabel" style="-fx-font-weight: bold; -fx-text-fill: green;"/>
+    </HBox>
+</VBox>

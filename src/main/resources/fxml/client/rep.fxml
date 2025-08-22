@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="754.0" stylesheets="@../../styles/right._board.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel_managment.controllers.client.ReportController">
+   <Label layoutX="187.0" layoutY="15.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Отчет о прибыли за месяц" />
+
+   <HBox spacing="10" />
+
+   <Label layoutX="43.0" layoutY="56.0" style="-fx-font-weight: bold;" text="Доход от номеров:" />
+   <TableView fx:id="roomsTable" layoutX="43.0" layoutY="87.0" prefHeight="218.0" prefWidth="666.0">
+      <columns>
+         <TableColumn fx:id="roomTypeColumn" prefWidth="238.40000534057617" text="Тип &#10;номера">
+            <cellValueFactory>
+               <PropertyValueFactory property="itemName" />
+            </cellValueFactory>
+         </TableColumn>
+         <TableColumn fx:id="roomBookingsColumn" prefWidth="237.5999755859375" text="Кол-во &#10;бронирований">
+            <cellValueFactory>
+               <PropertyValueFactory property="count" />
+            </cellValueFactory>
+         </TableColumn>
+         <TableColumn fx:id="roomRevenueColumn" prefWidth="188.0" text="Сумма &#10;дохода">
+            <cellValueFactory>
+               <PropertyValueFactory property="formattedAmount" />
+            </cellValueFactory>
+         </TableColumn>
+      </columns>
+   </TableView>
+
+   <Label layoutX="43.0" layoutY="327.0" style="-fx-font-weight: bold;" text="Доход от услуг:" />
+   <TableView fx:id="servicesTable" layoutX="43.0" layoutY="363.0" prefHeight="218.0" prefWidth="666.0">
+      <columns>
+         <TableColumn fx:id="serviceNameColumn" prefWidth="244.80002975463867" text="Название &#10;услуги">
+            <cellValueFactory>
+               <PropertyValueFactory property="itemName" />
+            </cellValueFactory>
+         </TableColumn>
+         <TableColumn fx:id="serviceOrdersColumn" prefWidth="231.199951171875" text="Кол-во &#10;бронирований">
+            <cellValueFactory>
+               <PropertyValueFactory property="count" />
+            </cellValueFactory>
+         </TableColumn>
+         <TableColumn fx:id="serviceRevenueColumn" prefWidth="188.800048828125" text="Сумма &#10;дохода">
+            <cellValueFactory>
+               <PropertyValueFactory property="formattedAmount" />
+            </cellValueFactory>
+         </TableColumn>
+      </columns>
+   </TableView>
+
+   <HBox spacing="10">
+      <Label fx:id="totalRevenueLabel" style="-fx-font-weight: bold; -fx-text-fill: green;" />
+   </HBox>
+   <Label layoutX="43.0" layoutY="613.0" style="-fx-font-weight: bold;" text="Общий доход за месяц:" />
+   <Button layoutX="533.0" layoutY="654.0" onAction="#refreshReport" text="Обновить отчет" />
+   <Button layoutX="363.0" layoutY="654.0" onAction="#exportToPdf" text="Экспорт в PDF" />
+</AnchorPane>

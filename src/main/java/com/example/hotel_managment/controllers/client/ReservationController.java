@@ -85,10 +85,6 @@ public class ReservationController implements Initializable {
      */
     ObservableList<Room> roomNumbersObservableList = FXCollections.observableArrayList();
     /**
-     * лист для хранения списка типов номеров с описанием из бд для вставки в таблицу
-     */
-    ObservableList<TypeOfRoom> typeOfRoomsNumbersObservableList = FXCollections.observableArrayList();
-    /**
      * переменная для хранения выбранного типа номеров из комбо-бокса
      */
     String chosenTypeOfRoom;
@@ -360,7 +356,9 @@ public class ReservationController implements Initializable {
         }
     }
 
-    // Метод для очистки формы
+    /**
+     *  Метод для очистки формы
+     */
     private void clearForm() {
         guest_fio_txt_fld.setText("");
         service_combo_box.setValue(null);
@@ -371,9 +369,14 @@ public class ReservationController implements Initializable {
         date_in_picker.setValue(LocalDate.now());
         sum_txt_fld1.setText("");
         number_of_room_tbl_clmn.setText("");
+        guest_id= null;
+        service_id = null;
+        room_id = null;
     }
 
-    // Метод для очистки таблицы доступных номеров
+    /**
+     *  Метод для очистки таблицы доступных номеров
+     */
     private void clearAvailableRoomsTable() {
         number_of_room_tbl_clmn.setCellValueFactory(null);
         capacity_of_room_tbl_clmn.setCellValueFactory(null);

@@ -2,6 +2,7 @@ package com.example.hotel_managment.views;
 
 import com.example.hotel_managment.controllers.client.MainController;
 import com.example.hotel_managment.db.DBUtilsGuest;
+import com.example.hotel_managment.models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -67,8 +68,8 @@ public class ViewFactory {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         stage.setScene(new Scene(root));
-        stage.setX(20);
-        stage.setY(20);
+        stage.setX(100);
+        stage.setY(70);
         stage.show();
     }
 

@@ -1,12 +1,11 @@
 package com.example.hotel_managment.controllers.client;
 
-import com.example.hotel_managment.db.DBUtilsGuest;
+import com.example.hotel_managment.db.DBUtilsSecurity;
+import com.example.hotel_managment.utils.PaymentUtils;
 import com.example.hotel_managment.db.DBUtilsReservation;
 import com.example.hotel_managment.db.DBUtilsRoom;
 import com.example.hotel_managment.db.DBUtilsService;
 import com.example.hotel_managment.models.*;
-import com.example.hotel_managment.views.ViewFactory;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,7 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -30,30 +28,18 @@ import java.util.stream.Collectors;
 
 public class PaymentController implements Initializable {
 
-    public TextField guest_fio_txt_fld;
-    public DatePicker date_out_picker;
-    public DatePicker date_in_picker;
-    public Button find_available_rooms_btn;
+    public TextField guest_fio_txt_fld, search_reservation_txt_fld, sum_txt_fld, room_num_txt_fld1;
+    public DatePicker date_out_picker, date_in_picker;
+    public Button find_available_rooms_btn, update_reservation_btn, add_new_payment_btn, delete_reservation_btn;
     public TableView<Room> list_of_rooms_tbl_view;
     public TableColumn<Room, Integer> number_of_room_tbl_clmn;
-    public ComboBox<String> type_of_room_combo_box;
-    public ComboBox<String> service_combo_box;
+    public ComboBox<String> type_of_room_combo_box, service_combo_box;
     public TableView<TypeOfRoom> list_of_type_rooms_tbl_view;
-    public TableColumn<TypeOfRoom, Integer> capacity_of_room_tbl_clmn;
-    public TableColumn<TypeOfRoom, Integer> cost_of_room_tbl_clmn;
-    public TextField search_reservation_txt_fld;
+    public TableColumn<TypeOfRoom, Integer> capacity_of_room_tbl_clmn, cost_of_room_tbl_clmn;
     public TableView<ReservationUS> list_of_reservations_table_view;
-    public TableColumn<ReservationUS, String> guest_fio_column;
-    public TableColumn<ReservationUS, String> service_name_column;
-    public TableColumn<ReservationUS, Integer> room_number_column;
-    public TableColumn<ReservationUS, String> type_of_room_column11;
-    public TableColumn<ReservationUS, Date> date_in_column;
-    public TableColumn<ReservationUS, Date> date_out_column;
-    public TableColumn<ReservationUS, Integer> sum_column1;
-    public TableColumn<ReservationUS, Integer> reservation_id_column;
-    public TableColumn<ReservationUS, Integer> guest_id_column;
-    public Button update_reservation_btn;
-    public TextField sum_txt_fld;
+    public TableColumn<ReservationUS, String> guest_fio_column, service_name_column, type_of_room_column11;
+    public TableColumn<ReservationUS, Integer> room_number_column, sum_column1, reservation_id_column, guest_id_column;
+    public TableColumn<ReservationUS, Date> date_in_column, date_out_column;
     /**
      * id выбранной брони для ее обновления
      */
@@ -111,10 +97,6 @@ public class PaymentController implements Initializable {
      */
     ObservableList<Room> roomNumbersObservableList = FXCollections.observableArrayList();
     /**
-     * лист для хранения списка типов номеров с описанием из бд для вставки в таблицу
-     */
-    ObservableList<TypeOfRoom> typeOfRoomsNumbersObservableList = FXCollections.observableArrayList();
-    /**
      * переменная для хранения выбранного типа номеров из комбо-бокса
      */
     String chosenTypeOfRoom;
@@ -129,6 +111,11 @@ public class PaymentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        if (DBUtilsSecurity.retrRole.equals("MANAGER")){
+            delete_reservation_btn.setVisible(false);
+        }
+
         /**
          * заполняем таблицу броней
          * и динамический поиск
@@ -239,17 +226,58 @@ public class PaymentController implements Initializable {
         update_reservation_btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if (guest_fio_txt_fld != null
-                        && chosenDateOut != null && chosenDateIn != null
-                        && chosenDateOut.after(chosenDateIn)
-                        && chosenTypeOfRoom != null && chosenRoomNumber != null
-                        && chosenService != null) {
+                if (index != null) {
+                    if (chosenRoomNumber == null){
+                        room_id = DBUtilsRoom.getRoomIdByRoomNumber(Integer.parseInt(room_num_txt_fld1.getText()));
+                    }
+                    if (chosenDateIn == null) {
+                        chosenDateIn = java.sql.Date.valueOf(date_in_column.getCellData(index).toString());
+                    }
+                    if (chosenDateOut == null) {
+                        chosenDateOut = java.sql.Date.valueOf(date_out_column.getCellData(index).toString());
+                    }
                     // Если все поля прошли валидацию, пробуем изменить бронь
                     try {
                         boolean res = DBUtilsReservation.updateReservation(res_id, guest_id, service_id, room_id, chosenDateIn, chosenDateOut);
                         if (res) {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setContentText("Бронь успешно изменена!");
+                            alert.show();
+                            getReservationsTableView();
+                            // Очищаем форму
+                            clearForm();
+                            // Очищаем таблицу доступных номеров
+                            clearAvailableRoomsTable();
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setContentText("Ошибка!");
+                            alert.show();
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Выберите бронь из списка!");
+                    alert.show();
+                }
+            }
+        });
+
+        /**
+         * обработка кнопки "оплатить"
+         */
+        add_new_payment_btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (sum_txt_fld != null) {
+                    // Если все поля прошли валидацию, пробуем оплатить бронь
+                    try {
+                        boolean res = DBUtilsReservation.SendReservationToPayments(res_id, Integer.parseInt(sum_txt_fld.getText()),
+                                java.sql.Date.valueOf(date_out_column.getCellData(index).toString()), PaymentUtils.getRandomPaymentMethod());
+                        if (res) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setContentText("Бронь успешно оплачена!");
                             alert.show();
                             getReservationsTableView();
 
@@ -273,6 +301,40 @@ public class PaymentController implements Initializable {
             }
         });
 
+        /**
+         * обработка кнопки "удалить бронь"
+         */
+        delete_reservation_btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (sum_txt_fld != null) {
+                    // Если все поля прошли валидацию, пробуем изменить бронь
+                    try {
+                        boolean res = DBUtilsReservation.deleteReservation(res_id);
+                        if (res) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setContentText("Бронь успешно удалена!");
+                            alert.show();
+                            getReservationsTableView();
+                            // Очищаем форму
+                            clearForm();
+                            // Очищаем таблицу доступных номеров
+                            clearAvailableRoomsTable();
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setContentText("Ошибка!");
+                            alert.show();
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Заполните поля корректными данными!");
+                    alert.show();
+                }
+            }
+        });
     }
 
     /**
@@ -333,14 +395,19 @@ public class PaymentController implements Initializable {
         type_of_room_combo_box.setValue(type_of_room_column11.getCellData(index));
         service_combo_box.setValue(service_name_column.getCellData(index));
 
-        sum_txt_fld.setText(sum_column1.getCellData(index).toString() + ",00 руб.");
+        sum_txt_fld.setText(sum_column1.getCellData(index).toString());
 
+        String number = String.valueOf(room_number_column.getCellData(index));
+        room_num_txt_fld1.setText(number);
         res_id = reservation_id_column.getCellData(index);
         guest_id = guest_id_column.getCellData(index);
         service_id = DBUtilsService.getServiceIdByServiceName(service_name_column.getCellData(index));
         DateIn = java.sql.Date.valueOf(date_in_column.getCellData(index).toString());
         DateOut = java.sql.Date.valueOf(date_out_column.getCellData(index).toString());
+
         System.out.println(DateIn + "-" + DateOut + ", " + res_id);
+
+
     }
 
     /**
@@ -357,7 +424,6 @@ public class PaymentController implements Initializable {
         }
         chosenRoomNumber = Integer.parseInt(number_of_room_tbl_clmn.getCellData(roomIndex).toString());
 
-        //String phone_txt_fld = (guest_phone_column.getCellData(index).toString());
         room_id = DBUtilsRoom.getRoomIdByRoomNumber(chosenRoomNumber);
         System.out.println("id выбранной комнаты: " + room_id);
     }
@@ -413,6 +479,14 @@ public class PaymentController implements Initializable {
         date_in_picker.setValue(LocalDate.now());
         sum_txt_fld.setText("");
         number_of_room_tbl_clmn.setText("");
+        room_num_txt_fld1.setText("");
+        res_id = null;
+        service_id = null;
+        room_id = null;
+        chosenService = null;
+        chosenDateOut = null;
+        chosenDateIn = null;
+        guest_id = null;
     }
 
     // Метод для очистки таблицы доступных номеров
@@ -431,4 +505,5 @@ public class PaymentController implements Initializable {
             typeOfRoomSearchObservableList.clear();
         }
     }
+
 }

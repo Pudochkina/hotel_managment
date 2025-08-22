@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0" prefWidth="825.0" stylesheets="@../../styles/left_board.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel_managment.controllers.client.ReportController">
+   <VBox spacing="10" style="-fx-background-color: #f9f9f9; -fx-padding: 10;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+      <!-- Заголовок отчета -->
+      <Label fx:id="header_lbl" alignment="CENTER" maxWidth="Infinity" prefHeight="29.0" prefWidth="803.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Прибыль отеля за период ">
+         <padding>
+            <Insets bottom="10" />
+         </padding>
+      </Label>
+
+      <!-- Период отчета -->
+      <HBox alignment="CENTER" spacing="10">
+         <Label style="-fx-font-weight: bold;" text="Период от:" />
+         <DatePicker fx:id="date_first_data_picker" />
+         <Label style="-fx-font-weight: bold;" text="до:" />
+         <DatePicker fx:id="date_second_data_picker" />
+         <Button fx:id="apply_btn" style="-fx-font-weight: bold;" text="Применить" />
+      </HBox>
+
+      <!-- Доход по номерам -->
+      <VBox prefHeight="235.0" prefWidth="803.0" spacing="10">
+         <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Доход по номерам" />
+
+         <TableView fx:id="rooms_money_tbl_view" prefHeight="191.0" prefWidth="794.0" style="-fx-background-color: #f9f9f9; -fx-border-width: 0;">
+            <columns>
+               <TableColumn prefWidth="287.9999942779541" style="-fx-font-weight: bold;" text="Тип номера">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="roomType" />
+                  </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="353.5999755859375" style="-fx-font-weight: bold;" text="Количество бронирований">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="bookingsCount" />
+                  </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="162.4000244140625" style="-fx-font-weight: bold;" text="Доход">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="income" />
+                  </cellValueFactory>
+               </TableColumn>
+            </columns>
+         </TableView>
+      </VBox>
+      <HBox alignment="TOP_RIGHT" spacing="20">
+         <children>
+            <Label fx:id="numbers_sum_lbl" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;" text="Итого по номерам:" />
+            <Label fx:id="numbers_sum_txt_fld" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;" />
+         </children>
+      </HBox>
+
+      <!-- Доход по услугам -->
+      <VBox prefHeight="246.0" prefWidth="803.0" spacing="10">
+         <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Доход по услугам" />
+
+         <TableView fx:id="services_money_tbl_view" prefHeight="206.0" prefWidth="794.0" style="-fx-background-color: #f9f9f9; -fx-border-width: 0;">
+            <columns>
+               <TableColumn prefWidth="291.1999759674072" style="-fx-font-weight: bold;" text="Тип услуги">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="serviceType" />
+                  </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="354.4001159667969" style="-fx-font-weight: bold;" text="Количество бронирований">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="bookingsCount" />
+                  </cellValueFactory>
+               </TableColumn>
+               <TableColumn prefWidth="159.199951171875" style="-fx-font-weight: bold;" text="Доход">
+                  <cellValueFactory>
+                     <PropertyValueFactory property="income" />
+                  </cellValueFactory>
+               </TableColumn>
+            </columns>
+         </TableView>
+      </VBox>
+
+      <!-- Кнопки -->
+      <HBox alignment="TOP_RIGHT" spacing="20">
+         <children>
+            <Label fx:id="service_sum_lbl" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;" text="Итого по услугам:" />
+            <Label fx:id="service_sum_txt_fld" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;" />
+         </children>
+      </HBox>
+      <HBox alignment="TOP_RIGHT" spacing="20">
+         <children>
+            <Label fx:id="summary_sum_lbl" alignment="TOP_RIGHT" style="-fx-font-weight: bold;" text="Общий доход:" />
+            <Label fx:id="summary_sum_txt_fld" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" spacing="20">
+         <children>
+            <Button fx:id="reload_btn1" prefHeight="27.0" prefWidth="221.0" style="-fx-font-weight: bold; -fx-pref-width: 150;" text="Обновить &#10;" textAlignment="CENTER" />
+         </children>
+      </HBox>
+   </VBox>
+</AnchorPane>

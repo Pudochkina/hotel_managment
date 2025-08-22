@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="704.0" stylesheets="@../../styles/right._board.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel_managment.controllers.client.DashboardController">
+   <AnchorPane layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="703.0" stylesheets="@../../styles/center_board.css">
+      <children>
+         <Label layoutX="50.0" layoutY="191.0" prefHeight="318.0" prefWidth="618.0" text="Задачи, выполняемые системой:&#10;  1.Управление номерным фондом:&#10;     1.Учет свободных и забронированных номеров;&#10;     2.Ведение информации о номерах (тип, количество мест, оснащение);&#10;     3.Планирование заезда/выезда гостей, контроль загрузки номеров.&#10;  2.Бронирование и продажа номеров:&#10;     1.Прием и обработка заявок на бронирование;&#10;     2.Учет информации о гостях (контактные данные, даты пребывания, &#10;       оплата);&#10;     3.Управление тарифами и ценообразованием.&#10;  3.Управление и продажа услуг:&#10;     1.Прием и обработка заявок на продажу услуг;&#10;     2.Учет информации об услугах (тип, описание);&#10;     3.Управление тарифами и ценообразованием.&#10;     4.Финансовый учет и отчетность&#10;" />
+         <Label layoutX="127.0" layoutY="150.0" text="Курсовая работа на тему &quot;Система управления отелем&quot;" />
+      </children></AnchorPane>
+</AnchorPane>

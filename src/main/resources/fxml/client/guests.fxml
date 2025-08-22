@@ -44,12 +44,12 @@
                      <Text layoutX="30.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ФИО:" />
                      <TextField fx:id="add_new_fio_txt_fld" layoutX="158.0" layoutY="38.0" prefHeight="26.0" prefWidth="462.0" promptText="..." styleClass="input_field" />
                      <Button fx:id="add_new_guest_btn" layoutX="546.0" layoutY="286.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Создать" textAlignment="CENTER" />
-                     <Label layoutX="215.0" layoutY="14.0" text="Добавить/Изменить/Удалить гостя">
+                     <Label layoutX="239.0" layoutY="14.0" text="Модифицировать данные гостя">
                         <font>
                            <Font name="Consolas" size="14.0" />
                         </font></Label>
                      <Text layoutX="30.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Телефон:&#10;" wrappingWidth="92.71199798583973" />
-                     <Text layoutX="7.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Эл. почта:&#10;" textAlignment="CENTER" wrappingWidth="102.39999999999986" />
+                     <Text layoutX="30.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Эл. почта:&#10;" textAlignment="CENTER" wrappingWidth="92.71199798583973" />
                      <Text layoutX="30.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Паспортные данные:&#10;" wrappingWidth="127.60397338867188" />
                      <Text layoutX="30.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата &#10;рождения:&#10;" wrappingWidth="102.40000000000009" />
                      <TextField fx:id="new_phone_txt_fld" layoutX="158.0" layoutY="90.0" prefHeight="23.0" prefWidth="150.0" promptText="..." styleClass="input_field_add_product" />
